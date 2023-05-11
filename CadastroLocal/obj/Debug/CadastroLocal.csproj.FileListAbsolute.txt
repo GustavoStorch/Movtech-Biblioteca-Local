@@ -20,3 +20,14 @@ C:\Users\estagiario1\Documents\Movtech\Projeto 1\CadastroLocal\CadastroLocal\obj
 C:\Users\estagiario1\Documents\Movtech\Projeto 1\CadastroLocal\CadastroLocal\obj\Debug\CadastroLocal.csproj.CoreCompileInputs.cache
 C:\Users\estagiario1\Documents\Movtech\Projeto 1\CadastroLocal\CadastroLocal\obj\Debug\CadastroLocal.exe
 C:\Users\estagiario1\Documents\Movtech\Projeto 1\CadastroLocal\CadastroLocal\obj\Debug\CadastroLocal.pdb
+C:\Users\estagiario1\Documents\Movtech\Projeto 1\Movtech-Biblioteca-Local\CadastroLocal\bin\Debug\CadastroLocal.exe.config
+C:\Users\estagiario1\Documents\Movtech\Projeto 1\Movtech-Biblioteca-Local\CadastroLocal\bin\Debug\CadastroLocal.exe
+C:\Users\estagiario1\Documents\Movtech\Projeto 1\Movtech-Biblioteca-Local\CadastroLocal\bin\Debug\CadastroLocal.pdb
+C:\Users\estagiario1\Documents\Movtech\Projeto 1\Movtech-Biblioteca-Local\CadastroLocal\obj\Debug\CadastroLocal.csproj.AssemblyReference.cache
+C:\Users\estagiario1\Documents\Movtech\Projeto 1\Movtech-Biblioteca-Local\CadastroLocal\obj\Debug\CadastroLocal.csproj.SuggestedBindingRedirects.cache
+C:\Users\estagiario1\Documents\Movtech\Projeto 1\Movtech-Biblioteca-Local\CadastroLocal\obj\Debug\CadastroLocal.Properties.Resources.resources
+C:\Users\estagiario1\Documents\Movtech\Projeto 1\Movtech-Biblioteca-Local\CadastroLocal\obj\Debug\CadastroLocal.csproj.GenerateResource.cache
+C:\Users\estagiario1\Documents\Movtech\Projeto 1\Movtech-Biblioteca-Local\CadastroLocal\obj\Debug\CadastroLocal.csproj.CoreCompileInputs.cache
+C:\Users\estagiario1\Documents\Movtech\Projeto 1\Movtech-Biblioteca-Local\CadastroLocal\obj\Debug\CadastroLocal.exe
+C:\Users\estagiario1\Documents\Movtech\Projeto 1\Movtech-Biblioteca-Local\CadastroLocal\obj\Debug\CadastroLocal.pdb
+C:\Users\estagiario1\Documents\Movtech\Projeto 1\Movtech-Biblioteca-Local\CadastroLocal\obj\Debug\CadastroLocal.FormCadLocal.resources

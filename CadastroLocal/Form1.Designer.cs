@@ -1,6 +1,6 @@
 ﻿namespace CadastroLocal
 {
-    partial class Form1
+    partial class FormCadLocal
     {
         /// <summary>
         /// Variável de designer necessária.
@@ -28,32 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.lblCadLocal = new System.Windows.Forms.Label();
             this.lblCodLocal = new System.Windows.Forms.Label();
             this.lblDescricao = new System.Windows.Forms.Label();
             this.txtCodLocal = new System.Windows.Forms.TextBox();
             this.txtDescricao = new System.Windows.Forms.TextBox();
-            this.gridCadLocal = new System.Windows.Forms.DataGridView();
             this.btnExcluir = new System.Windows.Forms.Button();
             this.btnSalvar = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.gridCadLocal)).BeginInit();
+            this.dtgDadosLocal = new System.Windows.Forms.DataGridView();
+            this.colCodLocal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNomeLocal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgDadosLocal)).BeginInit();
             this.SuspendLayout();
-            // 
-            // lblCadLocal
-            // 
-            this.lblCadLocal.AutoSize = true;
-            this.lblCadLocal.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCadLocal.Location = new System.Drawing.Point(501, 41);
-            this.lblCadLocal.Name = "lblCadLocal";
-            this.lblCadLocal.Size = new System.Drawing.Size(215, 36);
-            this.lblCadLocal.TabIndex = 0;
-            this.lblCadLocal.Text = "Cadastro Local";
             // 
             // lblCodLocal
             // 
             this.lblCodLocal.AutoSize = true;
-            this.lblCodLocal.Location = new System.Drawing.Point(128, 145);
+            this.lblCodLocal.Location = new System.Drawing.Point(12, 12);
             this.lblCodLocal.Name = "lblCodLocal";
             this.lblCodLocal.Size = new System.Drawing.Size(63, 20);
             this.lblCodLocal.TabIndex = 1;
@@ -62,61 +52,42 @@
             // lblDescricao
             // 
             this.lblDescricao.AutoSize = true;
-            this.lblDescricao.Location = new System.Drawing.Point(128, 223);
+            this.lblDescricao.Location = new System.Drawing.Point(12, 42);
             this.lblDescricao.Name = "lblDescricao";
             this.lblDescricao.Size = new System.Drawing.Size(84, 20);
             this.lblDescricao.TabIndex = 2;
             this.lblDescricao.Text = "Descrição:";
-            this.lblDescricao.Click += new System.EventHandler(this.label2_Click);
             // 
             // txtCodLocal
             // 
+            this.txtCodLocal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCodLocal.Enabled = false;
-            this.txtCodLocal.Location = new System.Drawing.Point(288, 142);
+            this.txtCodLocal.Location = new System.Drawing.Point(104, 9);
             this.txtCodLocal.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtCodLocal.MaxLength = 3;
             this.txtCodLocal.Name = "txtCodLocal";
-            this.txtCodLocal.Size = new System.Drawing.Size(205, 26);
+            this.txtCodLocal.Size = new System.Drawing.Size(162, 26);
             this.txtCodLocal.TabIndex = 4;
-            this.txtCodLocal.TextChanged += new System.EventHandler(this.txtCodLocal_TextChanged);
             // 
             // txtDescricao
             // 
-            this.txtDescricao.Location = new System.Drawing.Point(288, 220);
+            this.txtDescricao.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtDescricao.Location = new System.Drawing.Point(104, 39);
             this.txtDescricao.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtDescricao.MaxLength = 50;
             this.txtDescricao.Name = "txtDescricao";
-            this.txtDescricao.Size = new System.Drawing.Size(796, 26);
+            this.txtDescricao.Size = new System.Drawing.Size(711, 26);
             this.txtDescricao.TabIndex = 5;
-            // 
-            // gridCadLocal
-            // 
-            this.gridCadLocal.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.gridCadLocal.BackgroundColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.gridCadLocal.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.gridCadLocal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridCadLocal.Location = new System.Drawing.Point(132, 374);
-            this.gridCadLocal.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.gridCadLocal.Name = "gridCadLocal";
-            this.gridCadLocal.RowHeadersWidth = 62;
-            this.gridCadLocal.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridCadLocal.Size = new System.Drawing.Size(952, 309);
-            this.gridCadLocal.TabIndex = 10;
-            this.gridCadLocal.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.gridCadLocal_MouseDoubleClick);
             // 
             // btnExcluir
             // 
-            this.btnExcluir.Location = new System.Drawing.Point(679, 288);
+            this.btnExcluir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExcluir.Location = new System.Drawing.Point(699, 75);
             this.btnExcluir.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnExcluir.Name = "btnExcluir";
-            this.btnExcluir.Size = new System.Drawing.Size(176, 57);
+            this.btnExcluir.Size = new System.Drawing.Size(116, 34);
             this.btnExcluir.TabIndex = 9;
             this.btnExcluir.Text = "Excluir";
             this.btnExcluir.UseVisualStyleBackColor = true;
@@ -124,49 +95,85 @@
             // 
             // btnSalvar
             // 
-            this.btnSalvar.Location = new System.Drawing.Point(349, 288);
+            this.btnSalvar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSalvar.Location = new System.Drawing.Point(575, 75);
             this.btnSalvar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnSalvar.Name = "btnSalvar";
-            this.btnSalvar.Size = new System.Drawing.Size(176, 57);
+            this.btnSalvar.Size = new System.Drawing.Size(116, 34);
             this.btnSalvar.TabIndex = 8;
             this.btnSalvar.Text = "Salvar";
             this.btnSalvar.UseVisualStyleBackColor = true;
             this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
             // 
-            // Form1
+            // dtgDadosLocal
+            // 
+            this.dtgDadosLocal.AllowUserToAddRows = false;
+            this.dtgDadosLocal.AllowUserToDeleteRows = false;
+            this.dtgDadosLocal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtgDadosLocal.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dtgDadosLocal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtgDadosLocal.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colCodLocal,
+            this.colNomeLocal});
+            this.dtgDadosLocal.Location = new System.Drawing.Point(16, 117);
+            this.dtgDadosLocal.MultiSelect = false;
+            this.dtgDadosLocal.Name = "dtgDadosLocal";
+            this.dtgDadosLocal.ReadOnly = true;
+            this.dtgDadosLocal.RowHeadersWidth = 62;
+            this.dtgDadosLocal.RowTemplate.Height = 28;
+            this.dtgDadosLocal.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dtgDadosLocal.Size = new System.Drawing.Size(799, 372);
+            this.dtgDadosLocal.TabIndex = 10;
+            this.dtgDadosLocal.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgDadosLocal_CellDoubleClick);
+            // 
+            // colCodLocal
+            // 
+            this.colCodLocal.HeaderText = "Código";
+            this.colCodLocal.MinimumWidth = 8;
+            this.colCodLocal.Name = "colCodLocal";
+            this.colCodLocal.ReadOnly = true;
+            // 
+            // colNomeLocal
+            // 
+            this.colNomeLocal.HeaderText = "Local";
+            this.colNomeLocal.MinimumWidth = 8;
+            this.colNomeLocal.Name = "colNomeLocal";
+            this.colNomeLocal.ReadOnly = true;
+            // 
+            // FormCadLocal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1207, 710);
-            this.Controls.Add(this.gridCadLocal);
+            this.ClientSize = new System.Drawing.Size(828, 494);
+            this.Controls.Add(this.dtgDadosLocal);
             this.Controls.Add(this.btnExcluir);
             this.Controls.Add(this.btnSalvar);
             this.Controls.Add(this.txtDescricao);
             this.Controls.Add(this.txtCodLocal);
             this.Controls.Add(this.lblDescricao);
             this.Controls.Add(this.lblCodLocal);
-            this.Controls.Add(this.lblCadLocal);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.Name = "Form1";
+            this.Name = "FormCadLocal";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Novo Local";
-            this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.gridCadLocal)).EndInit();
+            this.Load += new System.EventHandler(this.FormCadLocal_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dtgDadosLocal)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label lblCadLocal;
         private System.Windows.Forms.Label lblCodLocal;
         private System.Windows.Forms.Label lblDescricao;
         private System.Windows.Forms.TextBox txtCodLocal;
         private System.Windows.Forms.TextBox txtDescricao;
-        private System.Windows.Forms.DataGridView gridCadLocal;
         private System.Windows.Forms.Button btnExcluir;
         private System.Windows.Forms.Button btnSalvar;
+        private System.Windows.Forms.DataGridView dtgDadosLocal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCodLocal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNomeLocal;
     }
 }
 

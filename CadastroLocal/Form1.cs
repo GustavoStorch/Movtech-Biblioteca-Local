@@ -11,207 +11,108 @@ using System.Windows.Forms;
 
 namespace CadastroLocal
 {
-    public partial class Form1 : Form
+    public partial class FormCadLocal : Form
     {
-
-        private SqlConnection conn;
-        private bool btnAtivo;
-
-        public Form1()
+        public FormCadLocal()
         {
             InitializeComponent();
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void FormCadLocal_Load(object sender, EventArgs e)
         {
-
-        }
-
-        private void txtCodLocal_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            table_load();
+            InitializeTable();
             CarregaID();
-            btnAtivo = false;
-            botaoAtivado();
-        }
-
-        //Cria a conexão com o banco de dados.
-        private SqlConnection Conexao()
-        {
-            conn = new SqlConnection(@"Data Source=localhost\sqlexpress;Initial Catalog=Treinamento;Integrated Security=True");
-            return conn;
-        }
-
-        //Método para ativar ou desativar o botão de excluir do usuário.
-        private void botaoAtivado()
-        {
-            if (btnAtivo)
-            {
-                btnExcluir.Enabled = true;
-            }
-            else
-            {
-                btnExcluir.Enabled = false;
-            }
-        }
-
-        //Recupera o próximo id a ser cadastrado e joga ele para o textBox.
-        private void CarregaID()
-        {
-            conn = Conexao();
-            conn.Open();
-
-            SqlCommand cm = new SqlCommand("SELECT IDENT_CURRENT('mvtBibLocal') + 1", conn);
-            int nextCod = Convert.ToInt32(cm.ExecuteScalar());
-
-            txtCodLocal.Text = nextCod.ToString();
-            conn.Close();
+            btnExcluir.Enabled = false;
         }
 
         //Botão com a funcionalidade de salvar/persistir os dados inseridos no banco de dados.
         private void btnSalvar_Click(object sender, EventArgs e)
         {
-            conn = Conexao();
-            String sql;
+            if (string.IsNullOrEmpty(txtCodLocal.Text) || string.IsNullOrWhiteSpace(txtCodLocal.Text))
+            {
+                MessageBox.Show("Informe o campo do Código do local");
+                return;
+            }
+            else if (string.IsNullOrEmpty(txtDescricao.Text) || string.IsNullOrWhiteSpace(txtDescricao.Text))
+            {
+                MessageBox.Show("Informe o campo da descrição do local");
+                return;
+            }
 
             try
             {
-                //Verifica se o campo do código está vazio e realiza o insert.
-                if (string.IsNullOrEmpty(this.txtCodLocal.Text))
+                using (SqlConnection connection = DaoConnection.GetConexao())
                 {
-                    sql = "INSERT INTO mvtBibLocal(descricaoLocal) VALUES(@descricaoLocal)";
-                    SqlCommand c = new SqlCommand(sql, conn);
+                    LocalDAO dao = new LocalDAO(connection);
 
-                    if (String.IsNullOrWhiteSpace(txtDescricao.Text))
+                    int count = dao.VerificaRegistros(new LocalModel()
                     {
-                        MessageBox.Show("Erro: Preencha a descrição do local!");
-                    }
-                    else
-                    {
-                        c.Parameters.Add(new SqlParameter("@descricaoLocal", this.txtDescricao.Text));
-                    }
+                        CodLocal = txtCodLocal.Text
+                    });
 
-                    conn.Open();
-                    c.ExecuteNonQuery();
-                    conn.Close();
-
-                    MessageBox.Show("Enviado com sucesso!");
-
-                    limparForm();
-                    table_load();
-                    CarregaID();
-                }
-                else
-                {
-                    //Verifica se o código presente no textbox já está registrado dentro do banco de dados.
-                    conn.Open();
-                    string sql2 = "SELECT COUNT(*) FROM mvtBibLocal WHERE codLocal = @codLocal";
-                    SqlCommand cmdSelect = new SqlCommand(sql2, conn);
-                    cmdSelect.Parameters.AddWithValue("@codLocal", txtCodLocal.Text);
-                    int count = Convert.ToInt32(cmdSelect.ExecuteScalar());
-                    conn.Close();
-
-                    //Se o código estiver registrado no banco de dados realiza apenas o update.
                     if (count > 0)
                     {
-                        sql = "UPDATE mvtBibLocal SET descricaoLocal = @descricaoLocal WHERE codLocal = @codLocal";
-                        SqlCommand c = new SqlCommand(sql, conn);
-
-                        c.Parameters.AddWithValue("@codLocal", txtCodLocal.Text);
-
-                        if (String.IsNullOrWhiteSpace(txtDescricao.Text))
+                        dao.Editar(new LocalModel()
                         {
-                            MessageBox.Show("Erro: Preencha a descrição do local!");
-                        }
-                        else
-                        {
-                            c.Parameters.Add(new SqlParameter("@descricaoLocal", this.txtDescricao.Text));
-                        }
-                        conn.Open();
-
-                        c.ExecuteNonQuery();
-
-                        conn.Close();
-
-                        MessageBox.Show("Atualizado com sucesso!");
-
-                        limparForm();
-                        table_load();
-                        CarregaID();
-                        btnAtivo = false;
-                        botaoAtivado();
+                            CodLocal = txtCodLocal.Text,
+                            NomeLocal = txtDescricao.Text
+                        });
+                        MessageBox.Show("Local Atualizado com sucesso!");
                     }
                     else
                     {
-                        //Se não estiver registrado no banco de dados realiza o insert.
-                        sql = "INSERT INTO mvtBibLocal(descricaoLocal) VALUES(@descricaoLocal)";
-                        SqlCommand c = new SqlCommand(sql, conn);
-
-                        if (String.IsNullOrWhiteSpace(txtDescricao.Text))
+                        dao.Salvar(new LocalModel()
                         {
-                            MessageBox.Show("Erro: Preencha a descrição do local!");
-                        }
-                        else
-                        {
-                            c.Parameters.Add(new SqlParameter("@descricaoLocal", this.txtDescricao.Text));
-                        }
-
-                        conn.Open();
-                        c.ExecuteNonQuery();
-                        conn.Close();
-
-                        MessageBox.Show("Enviado com sucesso!");
-
-                        limparForm();
-                        table_load();
-                        CarregaID();
-                    }
+                            CodLocal = txtCodLocal.Text,
+                            NomeLocal = txtDescricao.Text
+                        });
+                        MessageBox.Show("Local salvo com sucesso!");
+                    } 
                 }
-            } catch(SqlException ex)
+                InitializeTable();
+                limparForm();
+                CarregaID();
+                btnExcluir.Enabled = false;
+            }
+            catch (Exception ex)
             {
-                MessageBox.Show("Ocorreu o erro: " + ex);
-            } finally
-            {
-                conn.Close();
+                MessageBox.Show($"Houve um problema ao salvar o local!\n{ex.Message}");
             }
         }
 
         //Botão que realiza o Delete de um registro no banco de dados.
         private void btnExcluir_Click(object sender, EventArgs e)
         {
-            conn = Conexao();
-            String sql = "DELETE mvtBibLocal WHERE codLocal = @codLocal";
+            if (string.IsNullOrEmpty(txtDescricao.Text))
+            {
+                MessageBox.Show("Escolha o local!");
+                return;
+            }
+
+            DialogResult conf = MessageBox.Show("Tem certeza que deseja excluir o local?", "Ops, tem certeza?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
             try
             {
-                SqlCommand c = new SqlCommand(sql, conn);
-
-                c.Parameters.AddWithValue("@codLocal", txtCodLocal.Text);
-
-                conn.Open();
-                c.ExecuteNonQuery();
-
-                limparForm();
-                table_load();
-                CarregaID();
-                //btnAtivo = false;
-                botaoAtivado();
-
-                MessageBox.Show("Excluído com sucesso!");
-
+                if (conf == DialogResult.Yes)
+                {
+                    using (SqlConnection connection = DaoConnection.GetConexao())
+                    {
+                        LocalDAO dao = new LocalDAO(connection);
+                        dao.Excluir(new LocalModel()
+                        {
+                            CodLocal = txtCodLocal.Text
+                        });
+                    }
+                    MessageBox.Show("Local excluído com sucesso!");
+                    InitializeTable();
+                    limparForm();
+                    CarregaID();
+                    btnExcluir.Enabled = false;
+                }
             }
-            catch (SqlException ex)
+            catch (Exception ex)
             {
-                MessageBox.Show("Ocorreu o erro: " + ex);
-            }
-            finally
-            {
-                conn.Close();
+                MessageBox.Show($"Houve um problema ao excluir a editora!\n{ex.Message}");
             }
         }
 
@@ -223,39 +124,41 @@ namespace CadastroLocal
         }
 
         //Carrega todos os registros contidos no banco de dados para a DataGridView.
-        private void table_load()
+        private void InitializeTable()
         {
-            conn = Conexao();
-            String sql = "SELECT codLocal AS Código, descricaoLocal AS Descrição FROM mvtBibLocal ORDER BY Descrição";
-
-            try
+            dtgDadosLocal.Rows.Clear();
+            using (SqlConnection connection = DaoConnection.GetConexao())
             {
-                DataSet ds = new DataSet();
-                DataTable dt = new DataTable();
-
-                SqlDataAdapter da = new SqlDataAdapter(sql, conn);
-
-                conn.Open();
-                da.Fill(ds);
-                gridCadLocal.DataSource = ds.Tables[0];
+                LocalDAO dao = new LocalDAO(connection);
+                List<LocalModel> locais = dao.GetLocais();
+                foreach (LocalModel local in locais)
+                {
+                    DataGridViewRow row = dtgDadosLocal.Rows[dtgDadosLocal.Rows.Add()];
+                    row.Cells[colCodLocal.Index].Value = local.CodLocal;
+                    row.Cells[colNomeLocal.Index].Value = local.NomeLocal;
+                }
             }
-            catch (SqlException ex)
+        }
+
+        //Recupera o próximo id a ser cadastrado e joga ele para o textBox.
+        private void CarregaID()
+        {
+            using (SqlConnection connection = DaoConnection.GetConexao())
             {
-                MessageBox.Show("Ocorreu o erro: " + ex);
-            }
-            finally
-            {
-                conn.Close();
+                SqlCommand command = new SqlCommand("SELECT IDENT_CURRENT('mvtBibLocal') + 1", connection);
+                int nextCod = Convert.ToInt32(command.ExecuteScalar());
+
+                txtCodLocal.Text = nextCod.ToString();
             }
         }
 
         //Método que realiza o double click em uma linha da grid e joga todos os seus dados para as textBox.
-        private void gridCadLocal_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void dtgDadosLocal_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (gridCadLocal.SelectedRows.Count > 0)
+            if (e.RowIndex > -1 && e.ColumnIndex > -1)
             {
-                txtCodLocal.Text = gridCadLocal.SelectedRows[0].Cells[0].Value.ToString();
-                txtDescricao.Text = gridCadLocal.SelectedRows[0].Cells[1].Value.ToString();
+                txtCodLocal.Text = dtgDadosLocal.Rows[e.RowIndex].Cells[colCodLocal.Index].Value + "";
+                txtDescricao.Text = dtgDadosLocal.Rows[e.RowIndex].Cells[colNomeLocal.Index].Value + "";
 
                 if (string.IsNullOrEmpty(this.txtDescricao.Text))
                 {
@@ -266,7 +169,6 @@ namespace CadastroLocal
                 {
                     btnExcluir.Enabled = true;
                 }
-
             }
         }
     }
