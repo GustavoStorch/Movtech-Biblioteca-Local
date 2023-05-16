@@ -28,46 +28,45 @@ namespace CadastroLocal
         //Botão com a funcionalidade de salvar/persistir os dados inseridos no banco de dados.
         private void btnSalvar_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtCodLocal.Text) || string.IsNullOrWhiteSpace(txtCodLocal.Text))
-            {
-                MessageBox.Show("Informe o campo do Código do local");
-                return;
-            }
-            else if (string.IsNullOrEmpty(txtDescricao.Text) || string.IsNullOrWhiteSpace(txtDescricao.Text))
-            {
-                MessageBox.Show("Informe o campo da descrição do local");
-                return;
-            }
-
             try
             {
                 using (SqlConnection connection = DaoConnection.GetConexao())
                 {
                     LocalDAO dao = new LocalDAO(connection);
 
-                    int count = dao.VerificaRegistros(new LocalModel()
+                    bool verificaCampos = dao.VerificaCampos(new LocalModel()
                     {
-                        CodLocal = txtCodLocal.Text
+                        CodLocal = txtCodLocal.Text,
+                        NomeLocal = txtDescricao.Text
                     });
 
-                    if (count > 0)
+                    if (verificaCampos)
                     {
-                        dao.Editar(new LocalModel()
+
+                        int count = dao.VerificaRegistros(new LocalModel()
                         {
-                            CodLocal = txtCodLocal.Text,
-                            NomeLocal = txtDescricao.Text
+                            CodLocal = txtCodLocal.Text
                         });
-                        MessageBox.Show("Local Atualizado com sucesso!");
+
+                        if (count > 0)
+                        {
+                            dao.Editar(new LocalModel()
+                            {
+                                CodLocal = txtCodLocal.Text,
+                                NomeLocal = txtDescricao.Text
+                            });
+                            MessageBox.Show("Local Atualizado com sucesso!");
+                        }
+                        else
+                        {
+                            dao.Salvar(new LocalModel()
+                            {
+                                CodLocal = txtCodLocal.Text,
+                                NomeLocal = txtDescricao.Text
+                            });
+                            MessageBox.Show("Local salvo com sucesso!");
+                        }
                     }
-                    else
-                    {
-                        dao.Salvar(new LocalModel()
-                        {
-                            CodLocal = txtCodLocal.Text,
-                            NomeLocal = txtDescricao.Text
-                        });
-                        MessageBox.Show("Local salvo com sucesso!");
-                    } 
                 }
                 InitializeTable();
                 limparForm();
@@ -83,12 +82,6 @@ namespace CadastroLocal
         //Botão que realiza o Delete de um registro no banco de dados.
         private void btnExcluir_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtDescricao.Text))
-            {
-                MessageBox.Show("Escolha o local!");
-                return;
-            }
-
             DialogResult conf = MessageBox.Show("Tem certeza que deseja excluir o local?", "Ops, tem certeza?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
             try
@@ -98,12 +91,23 @@ namespace CadastroLocal
                     using (SqlConnection connection = DaoConnection.GetConexao())
                     {
                         LocalDAO dao = new LocalDAO(connection);
-                        dao.Excluir(new LocalModel()
+
+                        bool verificaCampos = dao.VerificaCampos(new LocalModel()
                         {
-                            CodLocal = txtCodLocal.Text
+                            CodLocal = txtCodLocal.Text,
+                            NomeLocal = txtDescricao.Text
                         });
+
+                        if (verificaCampos)
+                        {
+                            dao.Excluir(new LocalModel()
+                            {
+                                CodLocal = txtCodLocal.Text
+                            });
+                            MessageBox.Show("Local excluído com sucesso!");
+                        }
                     }
-                    MessageBox.Show("Local excluído com sucesso!");
+                    
                     InitializeTable();
                     limparForm();
                     CarregaID();
@@ -112,7 +116,7 @@ namespace CadastroLocal
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Houve um problema ao excluir a editora!\n{ex.Message}");
+                MessageBox.Show($"Houve um problema ao excluir o local!\n{ex.Message}");
             }
         }
 

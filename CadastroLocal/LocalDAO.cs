@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace CadastroLocal
 {
@@ -90,6 +91,22 @@ namespace CadastroLocal
                 int count = Convert.ToInt32(command.ExecuteScalar());
                 return count;
             }
+        }
+
+        public bool VerificaCampos(LocalModel local)
+        {
+            if (string.IsNullOrEmpty(local.CodLocal) || string.IsNullOrWhiteSpace(local.CodLocal))
+            {
+                MessageBox.Show("Informe o campo do Código do Local");
+                return false;
+            }
+            else if (string.IsNullOrEmpty(local.NomeLocal) || string.IsNullOrWhiteSpace(local.NomeLocal))
+            {
+                MessageBox.Show("Informe o campo do Nome do Local");
+                return false;
+            }
+
+            return true;
         }
 
         public List<LocalModel> GetLocais() 
