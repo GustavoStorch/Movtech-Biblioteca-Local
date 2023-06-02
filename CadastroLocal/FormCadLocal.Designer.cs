@@ -64,7 +64,7 @@
             this.txtCodLocal.Enabled = false;
             this.txtCodLocal.Location = new System.Drawing.Point(104, 8);
             this.txtCodLocal.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtCodLocal.MaxLength = 3;
+            this.txtCodLocal.MaxLength = 4;
             this.txtCodLocal.Name = "txtCodLocal";
             this.txtCodLocal.Size = new System.Drawing.Size(55, 26);
             this.txtCodLocal.TabIndex = 1;
